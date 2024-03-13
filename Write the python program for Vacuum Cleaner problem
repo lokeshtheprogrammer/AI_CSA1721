@@ -1,1 +1,48 @@
+def vacuum_cleaner_agent(location, state):
+    """
+    Simple reflex vacuum cleaner agent.
+
+    Parameters:
+    - location: The current location of the vacuum cleaner ('A' or 'B').
+    - state: A dictionary representing the current state of the environment.
+             For example, {'A': '1', 'B': '0'} means location A is dirty and B is clean.
+
+    Returns:
+    - The updated state of the environment after the agent's action.
+    """
+    print(f"Initial State: {state}")
+    print(f"Vacuum is initially at location {location}")
+
+    # Check if the current location is dirty
+    if state[location] == '1':
+        print(f"Location {location} is dirty.")
+        # Suck the dirt
+        state[location] = '0'
+        print(f"Cleaned location {location}.")
+    else:
+        print(f"Location {location} is already clean.")
+
+    # Move to the next location if necessary
+    if location == 'A':
+        next_location = 'B'
+    else:
+        next_location = 'A'
+
+    # Check if the next location is dirty and clean it if necessary
+    if state[next_location] == '1':
+        print(f"Moving to location {next_location} which is dirty.")
+        state[next_location] = '0'
+        print(f"Cleaned location {next_location}.")
+    else:
+        print(f"Location {next_location} is already clean. No need to move.")
+
+    print(f"Final State: {state}")
+    return state
+
+# Example usage
+if __name__ == "__main__":
+    initial_location = 'A'  # The vacuum starts at location A
+    environment_state = {'A': '1', 'B': '0'}  # A is dirty, B is clean
+
+    vacuum_cleaner_agent(initial_location, environment_state)
 

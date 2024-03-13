@@ -1,0 +1,40 @@
+def pour(jug1, jug2, goal, capacity1, capacity2):
+    print(f"Initial state: Jug1: {jug1} Jug2: {jug2}")
+    step = 0
+
+    # Loop until one of the jugs has the goal amount of water
+    while jug1 != goal and jug2 != goal:
+        step += 1
+        if jug1 == 0:
+            # Fill Jug1
+            jug1 = capacity1
+            print(f"Step {step}: Fill Jug1 -> Jug1: {jug1} Jug2: {jug2}")
+        elif jug2 == capacity2:
+            # If Jug2 is full, empty it
+            jug2 = 0
+            print(f"Step {step}: Empty Jug2 -> Jug1: {jug1} Jug2: {jug2}")
+        else:
+            # Transfer water from Jug1 to Jug2
+            transfer = min(jug1, capacity2 - jug2)
+            jug1 -= transfer
+            jug2 += transfer
+            print(f"Step {step}: Transfer Jug1 to Jug2 -> Jug1: {jug1} Jug2: {jug2}")
+        
+        # Check if we have reached the goal in either jug
+        if jug1 == goal or jug2 == goal:
+            print(f"Goal achieved: Jug1: {jug1} Jug2: {jug2}")
+            return True
+    
+    # If not solvable
+    return False
+
+# Example usage
+capacity1 = 4  # Capacity of Jug1
+capacity2 = 3  # Capacity of Jug2
+goal = 2       # Goal amount
+
+# Solve the problem
+solvable = pour(0, 0, goal, capacity1, capacity2)
+
+if not solvable:
+    print("No solution found")

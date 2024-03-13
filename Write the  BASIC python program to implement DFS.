@@ -1,0 +1,38 @@
+def dfs(graph, start_vertex):
+  """
+  Performs a Depth-First Search traversal on a graph.
+
+  Args:
+      graph (dict): A dictionary representing the graph. Keys are vertices, values are lists of adjacent vertices.
+      start_vertex (object): The starting vertex for the traversal.
+  """
+  visited = set()  # Keep track of visited vertices
+
+  def dfs_helper(vertex):
+    """
+    Helper function for the recursive DFS traversal.
+
+    Args:
+        vertex (object): The current vertex being explored.
+    """
+    visited.add(vertex)
+    print(vertex, end=" ")  # Print the visited vertex
+
+    for neighbor in graph[vertex]:
+      if neighbor not in visited:
+        dfs_helper(neighbor)
+
+  dfs_helper(start_vertex)
+
+# Example usage
+graph = {
+  'A': ['B', 'C'],
+  'B': ['D', 'E'],
+  'C': ['F'],
+  'D': [],
+  'E': ['F'],
+  'F': []
+}
+
+start_vertex = 'A'
+dfs(graph, start_vertex)

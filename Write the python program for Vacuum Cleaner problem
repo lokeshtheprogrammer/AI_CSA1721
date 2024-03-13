@@ -27,6 +27,13 @@ def vacuum_cleaner_agent(location, state):
         next_location = 'B'
     else:
         next_location = 'A'
+OUTPUT 
+Initial State: {'A': '1', 'B': '0'}
+Vacuum is initially at location A
+Location A is dirty.
+Cleaned location A.
+Location B is already clean. No need to move.
+Final State: {'A': '0', 'B': '0'}
 
     # Check if the next location is dirty and clean it if necessary
     if state[next_location] == '1':

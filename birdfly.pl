@@ -16,3 +16,9 @@ flightless_bird(ostrich).
 % ?- can_fly(eagle).
 % To check if a bird cannot fly, use:
 % ?- \+ can_fly(penguin).
+   output 
+    c:/Users/aimpr/Downloads/movie time/OneDrive/Documents/Prolog/birdfly.pl compiled 0.00 sec, 0 clauses
+?-  can_fly(eagle).
+true.
+
+?- 

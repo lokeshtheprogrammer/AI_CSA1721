@@ -1,0 +1,56 @@
+def is_valid(graph, colors, node, color):
+    """
+    Check if a node's color assignment is valid
+    """
+    for neighbor in graph[node]:
+        if colors[neighbor] == color:
+            return False
+    return True
+
+def color_map(graph, colors, nodes, color_options):
+    """
+    Recursive function to color the map
+    """
+    # Base case: If all nodes are assigned a color, return True
+    if all(color != None for color in colors.values()):
+        return True
+    
+    # Select the next node to color
+    for node in nodes:
+        if colors[node] is None:
+            break
+
+    # Try assigning each color to the current node
+    for color in color_options:
+        if is_valid(graph, colors, node, color):
+            colors[node] = color
+            if color_map(graph, colors, nodes, color_options):
+                return True
+            colors[node] = None  # Backtrack
+    return False
+
+def main():
+    # Example graph representing regions on a map and their adjacencies
+    # Key is the region, and the value is a list of adjacent regions
+    graph = {
+        'A': ['B', 'C'],
+        'B': ['A', 'C', 'D', 'E'],
+        'C': ['A', 'B', 'E', 'F'],
+        'D': ['B', 'E', 'G'],
+        'E': ['B', 'C', 'D', 'F', 'G'],
+        'F': ['C', 'E', 'G'],
+        'G': ['D', 'E', 'F']
+    }
+    colors = {node: None for node in graph}  # Color assignment to nodes
+    nodes = list(graph.keys())
+    color_options = ['Red', 'Green', 'Blue', 'Yellow']  # Available colors
+
+    if color_map(graph, colors, nodes, color_options):
+        print("Solution found:")
+        for node, color in colors.items():
+            print(f"{node}: {color}")
+    else:
+        print("No solution exists.")
+
+if __name__ == "__main__":
+    main()

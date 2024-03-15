@@ -1,0 +1,35 @@
+% Towers of Hanoi in Prolog
+
+% move(N, A, B, C) moves N disks from peg A to peg C, using peg B as auxiliary.
+move(0, _, _, _) :- !. % Base case: no more disks to move, so do nothing.
+move(N, A, B, C) :-
+    M is N-1, % Calculate the new N for the recursive call
+    move(M, A, C, B), % Move N-1 disks from A to B, using C as auxiliary
+    inform(A, C), % Move the remaining disk from A to C
+    move(M, B, A, C). % Move N-1 disks from B to C, using A as auxiliary
+
+% inform(X, Y) prints the move from peg X to peg Y.
+inform(X, Y) :-
+    write('Move disk from '), 
+    write(X), 
+    write(' to '), 
+    write(Y), 
+    nl.
+
+
+
+
+?- move(3, a, b, c).
+
+
+
+
+output 
+
+Move disk from a to c
+Move disk from a to b
+Move disk from c to b
+Move disk from a to c
+Move disk from b to a
+Move disk from b to c
+Move disk from a to c
